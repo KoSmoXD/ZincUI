@@ -117,7 +117,7 @@ assert(Zinc.Themes.XP and Zinc.Themes.Dark and Zinc.Themes.Midnight)
 local window = Zinc:CreateWindow({Title = "Test", Theme = "XP"})
 assert(window._theme.Background.R == 236 / 255, "XP palette incorrectly overridden")
 assert(window._statusLabel.Text == "Ready", "XP status bar missing")
-assert(window._main and window._main.Parent == gui, "window not mounted to PlayerGui")
+assert(window._main and window._main.Parent == window._gui and window._gui.Parent == gui, "window not mounted to PlayerGui")
 local home = window:CreateTab("Home")
 local section = home:CreateSection("Test controls")
 local seen = {}
