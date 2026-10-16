@@ -176,7 +176,10 @@ textbox:Set("replaced")
 local restored, reason = window:ImportConfig(exported)
 assert(restored, tostring(reason))
 assert(toggle:Get() == true and slider:Get() == 45 and textbox:Get() == "hello")
-assert(keybind:Get() == Enum.KeyCode.RightControl and picker:Get().G == 128 / 255)
+assert(keybind:Get() == Enum.KeyCode.RightControl,
+    "keybind did not restore: " .. tostring(keybind:Get() and keybind:Get().Name))
+assert(picker:Get().G == 128 / 255,
+    "color picker did not restore: " .. tostring(picker:Get().G))
 dropdown:Refresh({"XP", "Dark", "Midnight"}, true)
 assert(dropdown:Get() == "Dark")
 window:Minimize(true)
