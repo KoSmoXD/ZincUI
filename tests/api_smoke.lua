@@ -62,7 +62,7 @@ local function newNode(class)
     local n = {
         ClassName = class, Name = class, ZIndex = 1, Children = {},
         AbsoluteSize = vector(300, 150), AbsolutePosition = vector(0, 0),
-        InputBegan = signal(), InputEnded = signal(), Activated = signal(),
+        InputBegan = signal(), InputEnded = signal(), Activated = signal(), FocusLost = signal(),
         MouseEnter = signal(), MouseLeave = signal(), Destroyed = false,
     }
     function n:IsA(needed) return self.ClassName == needed end
