@@ -2,7 +2,7 @@
 
 **ZincUI 0.2.1** is a standalone, client-side Roblox Luau UI library with a classic Windows XP-inspired desktop-window layout. You can build your own app-style interface with tabs, sections, settings, and notifications. No Obsidian, Linoria, or third-party UI library is required.
 
-**Features:** one draggable window; blue title bar with minimize and close; left navigation; classic square and beveled controls; bottom status bar; notifications; touch and mouse input; automatic scaling; configurable themes; flags and JSON import/export; connection cleanup on destroy.
+**Features:** one window draggable by its blue title bar, bottom status bar, or lower edge (mouse and touch); blue title bar with minimize and close; left navigation; classic square and beveled controls; bottom status bar; notifications; touch and mouse input; automatic scaling; configurable themes; flags and JSON import/export; connection cleanup on destroy.
 
 ## Get started (Roblox Studio)
 
