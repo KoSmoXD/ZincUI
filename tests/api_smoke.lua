@@ -182,8 +182,35 @@ assert(picker:Get().G == 128 / 255,
     "color picker did not restore: " .. tostring(picker:Get().G))
 dropdown:Refresh({"XP", "Dark", "Midnight"}, true)
 assert(dropdown:Get() == "Dark")
+-- Drag from the bottom edge, status bar, and touch, not only the header.
+local start = window._main.Position
+local mouseDown = {UserInputType = Enum.UserInputType.MouseButton1,
+    Position = vector(100, 100)}
+window._bottomDragHandle.InputBegan:Fire(mouseDown)
+input.InputChanged:Fire({UserInputType = Enum.UserInputType.MouseMovement,
+    Position = vector(135, 125)})
+assert(window._main.Position.X.Offset == start.X.Offset + 35
+    and window._main.Position.Y.Offset == start.Y.Offset + 25,
+    "bottom edge should drag whole window with mouse")
+input.InputEnded:Fire(mouseDown)
+local last = window._main.Position
+input.InputChanged:Fire({UserInputType = Enum.UserInputType.MouseMovement,
+    Position = vector(800, 800)})
+assert(window._main.Position == last, "mouse release should stop bottom dragging")
+
+local touch = {UserInputType = Enum.UserInputType.Touch,
+    Position = vector(200, 200)}
+window._statusBar.InputBegan:Fire(touch)
+touch.Position = vector(218, 240)
+input.InputChanged:Fire(touch)
+assert(window._main.Position.X.Offset == last.X.Offset + 18
+    and window._main.Position.Y.Offset == last.Y.Offset + 40,
+    "status bar should drag whole window with touch")
+input.InputEnded:Fire(touch)
+
 window:Minimize(true)
 assert(window._minimized and not window._sidebar.Visible)
+assert(not window._bottomDragHandle.Visible, "bottom drag edge must hide when minimized")
 window:Minimize(false)
 assert(not window._minimized and window._sidebar.Visible)
 window:Toggle(false)
